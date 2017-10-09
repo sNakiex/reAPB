@@ -12,7 +12,7 @@ namespace LobbyServer.TCP.Packets
             Out.WriteByte((byte)client.Characters.Count);
             Out.WriteInt32Reverse(8); 
             Out.WriteByte(client.Account.Threat); 
-            lock (Program.worldListener.Worlds)
+            lock (Program.WorldListener.Worlds)
             {
                 foreach (CharacterEntry chr in client.Characters)
                 {
@@ -21,7 +21,7 @@ namespace LobbyServer.TCP.Packets
                     Out.WriteByte(1);
                     Out.WriteInt32Reverse(chr.World);
                     World.World info = null;
-                    Program.worldListener.Worlds.TryGetValue((uint)chr.World, out info);
+                    Program.WorldListener.Worlds.TryGetValue((uint)chr.World, out info);
                     if (info != null) Out.WriteParsedString(info.Name, 32);
                     else Out.WriteParsedString("(unavailable)", 32);
                     Out.WriteParsedString(chr.Name, 32);

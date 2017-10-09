@@ -15,9 +15,9 @@ namespace LobbyServer.TCP.Packets
             CharacterEntry character = Databases.CharacterTable.SingleOrDefault(c => c.AccountIndex == cclient.Account.Index && c.Slot == slotId);
             if (character.Index < 1) Log.Error(cclient.Account.Username, "Wrong slot specified!");
             World.World info = null;
-            lock (Program.worldListener.Worlds)
+            lock (Program.WorldListener.Worlds)
             {
-                Program.worldListener.Worlds.TryGetValue((uint)character.World, out info);
+                Program.WorldListener.Worlds.TryGetValue((uint)character.World, out info);
             }
 
             PacketOut Out = new PacketOut((uint)Opcodes.ANS_WORLD_ENTER);

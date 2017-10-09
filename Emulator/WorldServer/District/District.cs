@@ -19,54 +19,30 @@ namespace WorldServer.Districts
         ASYLUM = 0 //unknown type ID
     }
 
-    public enum LanguageCodes
-    {
-        EN = 0,
-        FR = 1,
-        IT = 2,
-        GE = 3,
-        ES = 4,
-        RU = 5
-    }
-
     public class District
     {
-        #region Internal
         public TcpClient tcp
         {
             get;
             set;
         }
-        #endregion
-
-        #region Limits
 
         public const ushort SocialLimit = 200;
         public const ushort ActionLimit = 100;
-
-        #endregion
 
         public District(TcpClient Tcp)
         {
             tcp = Tcp;
         }
 
-        public District(DistrictTypes type, byte id, LanguageCodes langCode = LanguageCodes.EN)
+        public District(DistrictTypes type, byte id)
         {
             _type = type;
-            _lang = langCode;
-            Type = (byte)((byte)type + (byte)langCode);
+            Type = (byte)type;
             Id = id;
         }
 
-        #region PrivateData
-
         private DistrictTypes _type;
-        private LanguageCodes _lang;
-
-        #endregion
-
-        #region APBData
 
         public byte Type
         {
@@ -75,24 +51,15 @@ namespace WorldServer.Districts
         }
 
         public byte Id;
-        public ushort Enforcers = 0;
-        public ushort Criminals = 0;
-        public ushort Queue = 0;
+        public ushort Enforcers = 0, Criminals = 0, Queue = 0, Port;
         public string IP = null;
-        public ushort Port;
         public uint Key = 0;
 
         public byte isFull()
         {
-            if (Type == (byte)DistrictTypes.SOCIAL)
-                return Enforcers + Criminals >= SocialLimit ? (byte)1 : (byte)0;
-            else
-                return Enforcers + Criminals >= ActionLimit ? (byte)1 : (byte)0;
-
+            if (Type == (byte)DistrictTypes.SOCIAL) return Enforcers + Criminals >= SocialLimit ? (byte)1 : (byte)0;
+            else return Enforcers + Criminals >= ActionLimit ? (byte)1 : (byte)0;
         }
-        #endregion
-
-        #region ToString
 
         public override string ToString()
         {
@@ -115,60 +82,32 @@ namespace WorldServer.Districts
                     result += "Missions-Waterfront";
                     break;
             }
-
-            switch (_lang)
-            {
-                case LanguageCodes.EN:
-                    result += "-EN";
-                    break;
-                case LanguageCodes.ES:
-                    result += "-ES";
-                    break;
-                case LanguageCodes.FR:
-                    result += "-FR";
-                    break;
-                case LanguageCodes.GE:
-                    result += "-GE";
-                    break;
-                case LanguageCodes.IT:
-                    result += "-IT";
-                    break;
-                case LanguageCodes.RU:
-                    result += "-RU";
-                    break;
-            }
-
-            result += "-" + Id.ToString();
+            result += "-EN-" + Id.ToString();
             return result;
         }
-        #endregion
     }
 
     public class SocialDistrict : District
     {
-        public SocialDistrict(byte id)
-            : base(DistrictTypes.SOCIAL, id)
+        public SocialDistrict(byte id) : base(DistrictTypes.SOCIAL, id)
         { }
     }
 
     public class TutorialDistrict : District
     {
-        public TutorialDistrict(byte id)
-            : base(DistrictTypes.TUTORIAL, id)
+        public TutorialDistrict(byte id) : base(DistrictTypes.TUTORIAL, id)
         { }
     }
 
     public class FinancialDistrict : District
     {
-        public FinancialDistrict(byte id, LanguageCodes langCode = LanguageCodes.EN)
-            : base(DistrictTypes.FINANCIAL, id, langCode)
+        public FinancialDistrict(byte id) : base(DistrictTypes.FINANCIAL, id)
         { }
     }
 
     public class WaterFrontDistrict : District
     {
-        public WaterFrontDistrict(byte id, LanguageCodes langCode = LanguageCodes.EN)
-            : base(DistrictTypes.WATERFRONT, id, langCode)
+        public WaterFrontDistrict(byte id) : base(DistrictTypes.WATERFRONT, id)
         { }
     }
 }

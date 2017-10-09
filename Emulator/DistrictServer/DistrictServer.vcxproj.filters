@@ -33,7 +33,7 @@
     <ClInclude Include="UdpListener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WS_DS_COM.h">
+    <ClInclude Include="WS2DS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

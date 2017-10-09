@@ -13,22 +13,20 @@ namespace LobbyServer.World.WL
             IP3 = (byte)ReadByte();
             IP4 = (byte)ReadByte();
             uint port = ReadD();
-            byte population = (byte)ReadByte();
             world.IP1 = IP1;
             world.IP2 = IP2;
             world.IP3 = IP3;
             world.IP4 = IP4;
             world.Port = port;
-            world.Population = population;
             Log.Succes(world.Name, "Address " + IP1 + "." + IP2 + "." + IP3 + "." + IP4 + ":" + port);
-            lock (Program.worldListener.Worlds)
+            lock (Program.WorldListener.Worlds)
             {
-                if (Program.worldListener.Worlds.ContainsKey(world.Id))
+                if (Program.WorldListener.Worlds.ContainsKey(world.Id))
                 {
                     Log.Error("SetData", "This world server is already registered!");
                     world.tcp.Close();
                 }
-                else Program.worldListener.Worlds.Add(world.Id, world);
+                else Program.WorldListener.Worlds.Add(world.Id, world);
             }
         }
     }

@@ -96,7 +96,7 @@ namespace LobbyServer.World
             Log.Error("World.Listener", world.Name + " disconnected!");
             try
             {
-                Program.worlds.Remove((byte)world.Id);
+                Program.Worlds.Remove((byte)world.Id);
                 lock (Worlds)
                 {
                     Worlds.Remove(world.Id);

@@ -10,7 +10,6 @@ Configuration::Configuration(char* file)
 	port = new char[4];
 	districtId = 0;
 	districtType = 0;
-	language = 0;
 
 	if (!in)
 	{
@@ -35,16 +34,6 @@ Configuration::Configuration(char* file)
 				else districtType = 1;
 			}
 			else if (line == 3) districtId = atoi(str);
-			else if (line == 4)
-			{
-				if (strcmp(str, "English") == 0) language = 0;
-				else if (strcmp(str, "French") == 0) language = 1;
-				else if (strcmp(str, "Italian") == 0) language = 2;
-				else if (strcmp(str, "German") == 0) language = 3;
-				else if (strcmp(str, "Spanish") == 0) language = 4;
-				else if (strcmp(str, "Russian") == 0) language = 5;
-				else language = 0;
-			}
 			line++;
 		}
 	}
@@ -69,9 +58,4 @@ int Configuration::GetDistrictType()
 int Configuration::GetDistrictID()
 {
 	return this->districtId;
-}
-
-int Configuration::GetDistrictLanguage()
-{
-	return this->language;
 }

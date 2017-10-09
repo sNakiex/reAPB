@@ -24,12 +24,12 @@ namespace LobbyServer.World.WL
             IPEndPoint address = (IPEndPoint)world.tcp.Client.RemoteEndPoint;
             if (ID != 0)
             {
-                if (Program.worlds.Contains(ID) == false)
+                if (Program.Worlds.Contains(ID) == false)
                 {
                     Log.Succes("RegisterWorld", name + " was registered! World ID: " + ID);
                     world.Id = ID;
                     world.Send(new LW.RegisterSuccess(ID));
-                    Program.worlds.Add(ID);
+                    Program.Worlds.Add(ID);
                 }
                 else
                 {

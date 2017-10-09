@@ -7,12 +7,12 @@ namespace WorldServer.Districts
 {
     class RegisterDistrict
     {
-        public static void Register(District district, TcpClient tcpClient, int type, byte ID, LanguageCodes language, string ip, string port, string token)
+        public static void Register(District district, TcpClient tcpClient, int type, byte ID, string ip, string port, string token)
         {
             switch ((DistrictTypes)type)
             {
                 case DistrictTypes.FINANCIAL:
-                    district = new FinancialDistrict(ID, language);
+                    district = new FinancialDistrict(ID);
                     break;
                 case DistrictTypes.SOCIAL:
                     district = new SocialDistrict(ID);
@@ -21,7 +21,7 @@ namespace WorldServer.Districts
                     district = new TutorialDistrict(ID);
                     break;
                 case DistrictTypes.WATERFRONT:
-                    district = new WaterFrontDistrict(ID, language);
+                    district = new WaterFrontDistrict(ID);
                     break;
             }
 
