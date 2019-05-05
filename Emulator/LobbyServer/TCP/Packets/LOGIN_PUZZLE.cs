@@ -8,11 +8,11 @@ namespace LobbyServer.TCP.Packets
         {
             PacketOut Out = new PacketOut((uint)Opcodes.LOGIN_PUZZLE);
 
-            //version 1.19.5.783126 -> change the numbers below in order to changes the supported emulator version
+            //05.05.2019 : version 1.19.7.806251 -> change the numbers below in order to change support for latest game version
             Out.WriteInt32Reverse(1);
             Out.WriteInt32Reverse(19);
-            Out.WriteInt32Reverse(5);
-            Out.WriteInt32Reverse(783126);
+            Out.WriteInt32Reverse(7);
+            Out.WriteInt32Reverse(806251);
 
             Out.WriteByte(0x05);
             for (int i = 0; i < client.ECrypt.Key.Length; i++) Out.WriteByte(client.ECrypt.Key[i]);
