@@ -44,6 +44,6 @@ public enum Opcodes : uint
     ANS_NUM_ADDITIONAL_CHARACTER_SLOTS = 2017,
     ANS_SSO_TOKEN = 2018,
     ANS_PREMIUM_STATUS = 2020,
-    WMI_REQUEST = 2021,
+    WMI_REQUEST = 2021
     #endregion
 };
