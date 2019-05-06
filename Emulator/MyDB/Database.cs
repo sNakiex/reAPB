@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -20,16 +19,17 @@ namespace MyDB
             }
         }
 
-        private string m_connectionString;
+        private readonly string m_connectionString;
         private MySqlConnection m_connection;
         private List<string> m_tables;
 
         public Database(string host, int port, string username, string password, string database)
         {
-            m_connectionString = String.Format("server={0};port={1};uid={2};pwd={3};database={4};", host, port, username, password, database);
-            m_connection = new MySqlConnection();
-
-            m_connection.ConnectionString = m_connectionString;
+            m_connectionString = string.Format("server={0};port={1};uid={2};pwd={3};database={4};SslMode=none", host, port, username, password, database);
+            m_connection = new MySqlConnection
+            {
+                ConnectionString = m_connectionString
+            };
         }
 
         public List<T> GetObjects<T>() where T : struct
